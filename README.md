@@ -1,6 +1,4 @@
-I need the blob SHA to update the file. Here's the complete new README.md content you can copy and paste directly:
 
-```markdown
 # Lavalink V4 - Discord Music Server
 
 A high-performance audio node server for Discord bots using Lavalink V4 and Wavelink v3. This repository contains everything you need to set up and deploy a Lavalink server for playing music in your Discord bot.
@@ -471,4 +469,4 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 **Last Updated:** 2026-05-01
 **Lavalink Version:** V4
 **Wavelink Version:** v3
-```
+
