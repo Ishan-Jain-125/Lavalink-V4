@@ -1,5 +1,5 @@
 server:
-  port: 10000 # Render automatically detects this
+  port: 443 # Render automatically detects this
   address: 0.0.0.0
 lavalink:
   server:
