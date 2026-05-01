@@ -2,10 +2,14 @@ server:
   port: 8080 # Render automatically detects this
   address: 0.0.0.0
 lavalink:
+  plugins:
+    # Latest 2026 version of the YouTube Source Plugin
+    - dependency: "dev.lavalink.youtube:youtube-plugin:1.11.5"
+      repository: "https://maven.lavalink.dev/releases"
   server:
     password: "youshallnotpass" # Aap ise change kar sakte hain
     sources:
-      youtube: true
+      youtube: False
       bandcamp: true
       soundcloud: true
       twitch: true
@@ -28,7 +32,21 @@ lavalink:
     useSeekGhosting: true
     youtubePlaylistLoadLimit: 6
     playerUpdateInterval: 5
-
+plugins:
+  youtube:
+    enabled: true
+    allowSearch: true
+    allowDirectVideoIds: true
+    allowDirectPlaylistIds: true
+    # Public clients that work best without any login/auth
+    clients:
+      - TVHTML5_SIMPLY
+      - ANDROID_VR
+      - MUSIC
+      - WEB
+    # OAuth is explicitly turned off
+    oauth:
+      enabled: false    
 metrics:
   prometheus:
     enabled: false
