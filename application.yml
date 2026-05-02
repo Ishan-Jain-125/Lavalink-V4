@@ -1,15 +1,20 @@
 server:
-  port: 8080 # Render automatically detects this
+  port: 8080
   address: 0.0.0.0
+
 lavalink:
   plugins:
-    # Latest 2026 version of the YouTube Source Plugin
+    # Essential for 2026: The actual YouTube playback engine
     - dependency: "dev.lavalink.youtube:youtube-plugin:1.11.5"
       repository: "https://maven.lavalink.dev/releases"
+    # The extended search engine
+    - dependency: "com.github.topi314.lavasrc:lavasrc-plugin:4.8.1"
+      repository: "https://maven.lavalink.dev/releases"
+
   server:
-    password: "youshallnotpass" # Aap ise change kar sakte hain
+    password: "youshallnotpass"
     sources:
-      youtube: False
+      youtube: false # Handled by the plugin
       bandcamp: true
       soundcloud: true
       twitch: true
@@ -27,35 +32,43 @@ lavalink:
     bufferDurationMs: 400
     frameBufferDurationMs: 5000
     opusEncodingQuality: 10
-    resamplingQuality: LOW
+    resamplingQuality: MEDIUM
     trackStuckThresholdMs: 10000
     useSeekGhosting: true
     youtubePlaylistLoadLimit: 6
     playerUpdateInterval: 5
+
 plugins:
+  # Base YouTube Settings
   youtube:
     enabled: true
     allowSearch: true
     allowDirectVideoIds: true
     allowDirectPlaylistIds: true
-    # Public clients that work best without any login/auth
     clients:
-      - TVHTML5_SIMPLY
-      - ANDROID_VR
       - MUSIC
-      - WEB
-    # OAuth is explicitly turned off
+      - ANDROID_VR
+      - TVHTML5_SIMPLY
     oauth:
-      enabled: false    
+      enabled: false
+
+  # LavaSrc configured specifically for YouTube
+  lavasrc:
+    providers: 
+      - "ytsearch:\"%ISRC%\"" # Uses unique song codes for high accuracy
+      - "ytsearch:%QUERY%"   # Standard YouTube search
+      - "ytmsearch:%QUERY%"  # Specifically searches YouTube Music
+    sources:
+      youtube: true          # Use LavaSrc's YouTube search features
+      spotify: false         # Disabled as requested
+      applemusic: false
+      deezer: false
+
 metrics:
   prometheus:
     enabled: false
-    endpoint: /metrics
 
 logging:
-  file:
-    path: ./logs/
-
   level:
     root: INFO
     lavalink: INFO
